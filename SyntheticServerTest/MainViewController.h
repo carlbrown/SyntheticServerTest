@@ -1,0 +1,15 @@
+//
+//  MainViewController.h
+//  SyntheticServerTest
+//
+//  Created by Carl Brown on 10/29/11.
+//  Copyright (c) 2011 PDAgent, LLC. All rights reserved.
+//
+
+#import "FlipsideViewController.h"
+
+@interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
+
+- (IBAction)showInfo:(id)sender;
+
+@end
