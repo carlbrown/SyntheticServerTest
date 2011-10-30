@@ -20,15 +20,15 @@
 		D319BB93145CE32900D2CDB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BB6E145CE32800D2CDB3 /* Foundation.framework */; };
 		D319BB9B145CE32900D2CDB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D319BB99145CE32900D2CDB3 /* InfoPlist.strings */; };
 		D319BB9E145CE32900D2CDB3 /* SyntheticServerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB9D145CE32900D2CDB3 /* SyntheticServerTestTests.m */; };
-		D319BBAA145CE44B00D2CDB3 /* GTMTestHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */; };
-		D319BBAD145CE46A00D2CDB3 /* GTMHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */; };
-		D319BBB0145CE74200D2CDB3 /* GTMRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBAF145CE74200D2CDB3 /* GTMRegex.m */; };
 		D319BBB6145CE87E00D2CDB3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */; };
 		D319BBB7145CE88800D2CDB3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */; };
-		D319BBC0145CF26600D2CDB3 /* PDBackgroundHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */; };
 		D319BBC5145CF9C600D2CDB3 /* carlbrown.json in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC2145CF9C600D2CDB3 /* carlbrown.json */; };
 		D319BBC6145CF9C600D2CDB3 /* RegexONNSString.atom in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */; };
 		D319BBC7145CF9C600D2CDB3 /* RegexOnNSString.json in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */; };
+		D319BBD4145D0CAD00D2CDB3 /* GTMHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBCC145D0CAD00D2CDB3 /* GTMHTTPServer.m */; };
+		D319BBD5145D0CAD00D2CDB3 /* GTMRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBCE145D0CAD00D2CDB3 /* GTMRegex.m */; };
+		D319BBD6145D0CAD00D2CDB3 /* GTMTestHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBD0145D0CAD00D2CDB3 /* GTMTestHTTPServer.m */; };
+		D319BBD7145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBD3145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,22 +60,22 @@
 		D319BB98145CE32900D2CDB3 /* SyntheticServerTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SyntheticServerTestTests-Info.plist"; sourceTree = "<group>"; };
 		D319BB9A145CE32900D2CDB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D319BB9D145CE32900D2CDB3 /* SyntheticServerTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyntheticServerTestTests.m; sourceTree = "<group>"; };
-		D319BBA8145CE44B00D2CDB3 /* GTMTestHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMTestHTTPServer.h; sourceTree = "<group>"; };
-		D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMTestHTTPServer.m; sourceTree = "<group>"; };
-		D319BBAB145CE46A00D2CDB3 /* GTMHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPServer.h; sourceTree = "<group>"; };
-		D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPServer.m; sourceTree = "<group>"; };
-		D319BBAE145CE74100D2CDB3 /* GTMRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMRegex.h; sourceTree = "<group>"; };
-		D319BBAF145CE74200D2CDB3 /* GTMRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMRegex.m; sourceTree = "<group>"; };
-		D319BBB1145CE75500D2CDB3 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		D319BBB2145CE77F00D2CDB3 /* GTMDebugSelectorValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDebugSelectorValidation.h; sourceTree = "<group>"; };
-		D319BBB3145CE77F00D2CDB3 /* GTMTypeCasting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMTypeCasting.h; sourceTree = "<group>"; };
-		D319BBB4145CE79700D2CDB3 /* GTMGarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGarbageCollection.h; sourceTree = "<group>"; };
 		D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		D319BBBE145CF26600D2CDB3 /* PDBackgroundHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBackgroundHTTPServer.h; sourceTree = "<group>"; };
-		D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBackgroundHTTPServer.m; sourceTree = "<group>"; };
-		D319BBC2145CF9C600D2CDB3 /* carlbrown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = carlbrown.json; sourceTree = SOURCE_ROOT; };
-		D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RegexONNSString.atom; sourceTree = SOURCE_ROOT; };
-		D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RegexOnNSString.json; sourceTree = SOURCE_ROOT; };
+		D319BBC2145CF9C600D2CDB3 /* carlbrown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = carlbrown.json; path = TestData/carlbrown.json; sourceTree = SOURCE_ROOT; };
+		D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RegexONNSString.atom; path = TestData/RegexONNSString.atom; sourceTree = SOURCE_ROOT; };
+		D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = RegexOnNSString.json; path = TestData/RegexOnNSString.json; sourceTree = SOURCE_ROOT; };
+		D319BBC8145D0CAC00D2CDB3 /* GTMDebugSelectorValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMDebugSelectorValidation.h; path = TestSupport/GTMDebugSelectorValidation.h; sourceTree = "<group>"; };
+		D319BBC9145D0CAD00D2CDB3 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMDefines.h; path = TestSupport/GTMDefines.h; sourceTree = "<group>"; };
+		D319BBCA145D0CAD00D2CDB3 /* GTMGarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMGarbageCollection.h; path = TestSupport/GTMGarbageCollection.h; sourceTree = "<group>"; };
+		D319BBCB145D0CAD00D2CDB3 /* GTMHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPServer.h; path = TestSupport/GTMHTTPServer.h; sourceTree = "<group>"; };
+		D319BBCC145D0CAD00D2CDB3 /* GTMHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPServer.m; path = TestSupport/GTMHTTPServer.m; sourceTree = "<group>"; };
+		D319BBCD145D0CAD00D2CDB3 /* GTMRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMRegex.h; path = TestSupport/GTMRegex.h; sourceTree = "<group>"; };
+		D319BBCE145D0CAD00D2CDB3 /* GTMRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMRegex.m; path = TestSupport/GTMRegex.m; sourceTree = "<group>"; };
+		D319BBCF145D0CAD00D2CDB3 /* GTMTestHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMTestHTTPServer.h; path = TestSupport/GTMTestHTTPServer.h; sourceTree = "<group>"; };
+		D319BBD0145D0CAD00D2CDB3 /* GTMTestHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMTestHTTPServer.m; path = TestSupport/GTMTestHTTPServer.m; sourceTree = "<group>"; };
+		D319BBD1145D0CAD00D2CDB3 /* GTMTypeCasting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMTypeCasting.h; path = TestSupport/GTMTypeCasting.h; sourceTree = "<group>"; };
+		D319BBD2145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDBackgroundHTTPServer.h; path = TestSupport/PDBackgroundHTTPServer.h; sourceTree = "<group>"; };
+		D319BBD3145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDBackgroundHTTPServer.m; path = TestSupport/PDBackgroundHTTPServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +107,7 @@
 		D319BB5D145CE32800D2CDB3 = {
 			isa = PBXGroup;
 			children = (
-				D319BBBD145CF22700D2CDB3 /* SyntheticServer */,
-				D319BBA7145CE3F800D2CDB3 /* OldGoogleToolBoxFiles */,
+				D319BBD8145D0CB200D2CDB3 /* TestSupport */,
 				D319BB72145CE32900D2CDB3 /* SyntheticServerTest */,
 				D319BB96145CE32900D2CDB3 /* SyntheticServerTestTests */,
 				D319BB6B145CE32800D2CDB3 /* Frameworks */,
@@ -180,32 +179,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D319BBA7145CE3F800D2CDB3 /* OldGoogleToolBoxFiles */ = {
-			isa = PBXGroup;
-			children = (
-				D319BBB4145CE79700D2CDB3 /* GTMGarbageCollection.h */,
-				D319BBB2145CE77F00D2CDB3 /* GTMDebugSelectorValidation.h */,
-				D319BBB3145CE77F00D2CDB3 /* GTMTypeCasting.h */,
-				D319BBB1145CE75500D2CDB3 /* GTMDefines.h */,
-				D319BBAE145CE74100D2CDB3 /* GTMRegex.h */,
-				D319BBAF145CE74200D2CDB3 /* GTMRegex.m */,
-				D319BBAB145CE46A00D2CDB3 /* GTMHTTPServer.h */,
-				D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */,
-				D319BBA8145CE44B00D2CDB3 /* GTMTestHTTPServer.h */,
-				D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */,
-			);
-			name = OldGoogleToolBoxFiles;
-			sourceTree = "<group>";
-		};
-		D319BBBD145CF22700D2CDB3 /* SyntheticServer */ = {
-			isa = PBXGroup;
-			children = (
-				D319BBBE145CF26600D2CDB3 /* PDBackgroundHTTPServer.h */,
-				D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */,
-			);
-			name = SyntheticServer;
-			sourceTree = "<group>";
-		};
 		D319BBC1145CF73F00D2CDB3 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +187,25 @@
 				D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */,
 			);
 			name = TestData;
+			sourceTree = "<group>";
+		};
+		D319BBD8145D0CB200D2CDB3 /* TestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				D319BBC8145D0CAC00D2CDB3 /* GTMDebugSelectorValidation.h */,
+				D319BBC9145D0CAD00D2CDB3 /* GTMDefines.h */,
+				D319BBCA145D0CAD00D2CDB3 /* GTMGarbageCollection.h */,
+				D319BBCB145D0CAD00D2CDB3 /* GTMHTTPServer.h */,
+				D319BBCC145D0CAD00D2CDB3 /* GTMHTTPServer.m */,
+				D319BBCD145D0CAD00D2CDB3 /* GTMRegex.h */,
+				D319BBCE145D0CAD00D2CDB3 /* GTMRegex.m */,
+				D319BBCF145D0CAD00D2CDB3 /* GTMTestHTTPServer.h */,
+				D319BBD0145D0CAD00D2CDB3 /* GTMTestHTTPServer.m */,
+				D319BBD1145D0CAD00D2CDB3 /* GTMTypeCasting.h */,
+				D319BBD2145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.h */,
+				D319BBD3145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.m */,
+			);
+			name = TestSupport;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,10 +329,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D319BB9E145CE32900D2CDB3 /* SyntheticServerTestTests.m in Sources */,
-				D319BBAA145CE44B00D2CDB3 /* GTMTestHTTPServer.m in Sources */,
-				D319BBAD145CE46A00D2CDB3 /* GTMHTTPServer.m in Sources */,
-				D319BBB0145CE74200D2CDB3 /* GTMRegex.m in Sources */,
-				D319BBC0145CF26600D2CDB3 /* PDBackgroundHTTPServer.m in Sources */,
+				D319BBD4145D0CAD00D2CDB3 /* GTMHTTPServer.m in Sources */,
+				D319BBD5145D0CAD00D2CDB3 /* GTMRegex.m in Sources */,
+				D319BBD6145D0CAD00D2CDB3 /* GTMTestHTTPServer.m in Sources */,
+				D319BBD7145D0CAD00D2CDB3 /* PDBackgroundHTTPServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
