@@ -3,7 +3,7 @@
 //  SyntheticServerTest
 //
 //  Created by Carl Brown on 10/29/11.
-//  Copyright (c) 2011 PDAgent, LLC. All rights reserved.
+//  Copyright (c) 2011 PDAgent, LLC. Released under MIT License.
 //
 
 #import "AppDelegate.h"
