@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:/carlbrown/RegexOnNSString/commits/master</id>
+  <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commits/master"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/carlbrown/RegexOnNSString/commits/master.atom"/>
+  <title>Recent Commits to RegexOnNSString:master</title>
+  <updated>2011-10-08T13:11:50-07:00</updated>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/d75c5b0450cdfe3062ba897fc60376fe629d22f3</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/d75c5b0450cdfe3062ba897fc60376fe629d22f3"/>
+    <title>shorter convenience methods</title>
+    <updated>2011-10-08T13:11:50-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>shorter convenience methods&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/705d029467d918ac0402125e15eae45719655d17</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/705d029467d918ac0402125e15eae45719655d17"/>
+    <title>Boolean matches at all method</title>
+    <updated>2011-10-07T21:12:49-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>Boolean matches at all method&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/03218db6acce7b6118beb2bdeaaaf53cd4c874a1</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/03218db6acce7b6118beb2bdeaaaf53cd4c874a1"/>
+    <title>Added method to grab array of substrings matching paren groups</title>
+    <updated>2011-10-07T15:46:29-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>Added method to grab array of substrings matching paren groups&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/72cb2c6d08adc4ac71c3818ff726510fb978cd5d</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/72cb2c6d08adc4ac71c3818ff726510fb978cd5d"/>
+    <title>multiline support</title>
+    <updated>2011-10-07T11:10:50-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>multiline support&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/023bfb511443afecb75dfe0eb96c49772b525f98</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/023bfb511443afecb75dfe0eb96c49772b525f98"/>
+    <title>license update</title>
+    <updated>2011-10-04T21:54:37-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>+ LICENSE
+m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleAppDelegate.h
+m RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleAppDelegate.m
+m RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleViewController.h
+m RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleViewController.m
+m RegexOnNSStringIOSExample/main.m
+m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExample/RegexOnNSStringOSXExampleAppDelegate.h
+m RegexOnNSStringOSXExample/RegexOnNSStringOSXExampleAppDelegate.m
+m RegexOnNSStringOSXExample/main.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>license update&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/a6766640c159f017e55618626e89c47c33378a21</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/a6766640c159f017e55618626e89c47c33378a21"/>
+    <title>Updated Read Me</title>
+    <updated>2011-10-03T14:43:51-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m README.md
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>Updated Read Me&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/6c8b6983188fc5cf63216dd7a03b97112f39ef10</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/6c8b6983188fc5cf63216dd7a03b97112f39ef10"/>
+    <title>Read Me</title>
+    <updated>2011-10-03T14:42:09-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>+ README.md
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>Read Me&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/83e77a2529d04f5776c08a549ddc96e1ccd90326</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/83e77a2529d04f5776c08a549ddc96e1ccd90326"/>
+    <title>now comparing regex with straight string replace</title>
+    <updated>2011-10-03T12:32:49-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>now comparing regex with straight string replace
+
+instead of stringWithFormat creation&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/166862220522511267a92a19a27e19f91fadbf34</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/166862220522511267a92a19a27e19f91fadbf34"/>
+    <title>performance tests show regex takes 10x longer than stringWithFormat</title>
+    <updated>2011-10-03T08:44:26-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>performance tests show regex takes 10x longer than stringWithFormat&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/4be6332f45cd543aaf8a5d7cc3bbb9237f63afb0</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/4be6332f45cd543aaf8a5d7cc3bbb9237f63afb0"/>
+    <title>fix case in stringByreplacingRegexPattern method</title>
+    <updated>2011-10-03T08:22:03-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.h
+m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>fix case in stringByreplacingRegexPattern method&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/4a2cfbdee6b28708b250e984ffbe1ded4dd2d664</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/4a2cfbdee6b28708b250e984ffbe1ded4dd2d664"/>
+    <title>paren test and IOS tests</title>
+    <updated>2011-10-03T08:19:25-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>paren test and IOS tests&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/23e40af63fb96d0d67f50d86af3a7a87912ebd29</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/23e40af63fb96d0d67f50d86af3a7a87912ebd29"/>
+    <title>log error and return nil on invalid regex</title>
+    <updated>2011-10-03T08:04:37-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>m RegexOnNSString/NSString+PDRegex.m
+m RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>log error and return nil on invalid regex&lt;/pre>
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/a5db653b67654721afbdad9eb04084dc24e96948</id>
+    <link type="text/html" rel="alternate" href="https://github.com/carlbrown/RegexOnNSString/commit/a5db653b67654721afbdad9eb04084dc24e96948"/>
+    <title>Initial Commit</title>
+    <updated>2011-10-03T06:37:07-07:00</updated>
+    <media:thumbnail height="30" width="30" url="https://secure.gravatar.com/avatar/ce3382af7278c264d042948d58df683c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"/>
+      <author>
+        <name>Carl Brown</name>
+        <uri>https://github.com/carlbrown</uri>
+      </author>
+    <content type="html">
+      &lt;pre>+ RegexOnNSString.xcodeproj/project.pbxproj
++ RegexOnNSString.xcodeproj/project.xcworkspace/contents.xcworkspacedata
++ RegexOnNSString.xcodeproj/xcshareddata/xcschemes/RegexOnNSStringIOSExample.xcscheme
++ RegexOnNSString.xcodeproj/xcshareddata/xcschemes/RegexOnNSStringOSXExample.xcscheme
++ RegexOnNSString/NSString+PDRegex.h
++ RegexOnNSString/NSString+PDRegex.m
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExample-Info.plist
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExample-Prefix.pch
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleAppDelegate.h
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleAppDelegate.m
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleViewController.h
++ RegexOnNSStringIOSExample/RegexOnNSStringIOSExampleViewController.m
++ RegexOnNSStringIOSExample/en.lproj/InfoPlist.strings
++ RegexOnNSStringIOSExample/en.lproj/MainWindow.xib
++ RegexOnNSStringIOSExample/en.lproj/RegexOnNSStringIOSExampleViewController.xib
++ RegexOnNSStringIOSExample/main.m
++ RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests-Info.plist
++ RegexOnNSStringIOSExampleTests/RegexOnNSStringIOSExampleTests.m
++ RegexOnNSStringIOSExampleTests/en.lproj/InfoPlist.strings
++ RegexOnNSStringOSXExample/RegexOnNSStringOSXExample-Info.plist
++ RegexOnNSStringOSXExample/RegexOnNSStringOSXExample-Prefix.pch
++ RegexOnNSStringOSXExample/RegexOnNSStringOSXExampleAppDelegate.h
++ RegexOnNSStringOSXExample/RegexOnNSStringOSXExampleAppDelegate.m
++ RegexOnNSStringOSXExample/en.lproj/Credits.rtf
++ RegexOnNSStringOSXExample/en.lproj/InfoPlist.strings
++ RegexOnNSStringOSXExample/en.lproj/MainMenu.xib
++ RegexOnNSStringOSXExample/main.m
++ RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests-Info.plist
++ RegexOnNSStringOSXExampleTests/RegexOnNSStringOSXExampleTests.m
++ RegexOnNSStringOSXExampleTests/en.lproj/InfoPlist.strings
+&lt;/pre>
+      &lt;pre style='white-space:pre-wrap;width:81ex'>Initial Commit&lt;/pre>
+    </content>
+  </entry>
+</feed>

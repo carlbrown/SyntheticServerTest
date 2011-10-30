@@ -1,3 +1,4 @@
+
 //
 //  SyntheticServerTestTests.m
 //  SyntheticServerTestTests
@@ -6,7 +7,14 @@
 //  Copyright (c) 2011 PDAgent, LLC. All rights reserved.
 //
 
-#import "SyntheticServerTestTests.h"
+#import <SenTestingKit/SenTestingKit.h>
+#import "PDBackgroundHTTPServer.h"
+
+@interface SyntheticServerTestTests : SenTestCase {
+    PDBackgroundHTTPServer *testServer;
+}
+
+@end
 
 @implementation SyntheticServerTestTests
 
@@ -14,19 +22,31 @@
 {
     [super setUp];
     
-    // Set-up code here.
+    testServer = [[PDBackgroundHTTPServer alloc] init];
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
+    [testServer setShouldStop:YES];
+    [testServer release]; testServer=nil;
     
     [super tearDown];
 }
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in SyntheticServerTestTests");
+    NSString *testDataDirectory=[[[NSBundle bundleForClass:[self class]] pathForResource:@"carlbrown"
+											 ofType:@"json"] stringByDeletingLastPathComponent];
+    [testServer startServerWithDocumentRoot:testDataDirectory];
+    STAssertTrue(([testServer port] > 0), @"should have a port assigned");
+    NSString *urlString=[NSString stringWithFormat:@"http://localhost:%u/%@",[testServer port],@"carlbrown.json"];
+    NSURL *testURL=[NSURL URLWithString:urlString];
+    NSError *error=nil;
+    NSStringEncoding encoding;
+    NSString *test_json_String=[NSString stringWithContentsOfURL:testURL usedEncoding:&encoding error:&error];
+    STAssertNil(error, @"should not have gotten an error");
+    STAssertNotNil(test_json_String, @"Should have gotten data back");
+    
 }
 
 @end

@@ -14,14 +14,21 @@
 		D319BB79145CE32900D2CDB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB78145CE32900D2CDB3 /* main.m */; };
 		D319BB7D145CE32900D2CDB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB7C145CE32900D2CDB3 /* AppDelegate.m */; };
 		D319BB80145CE32900D2CDB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB7F145CE32900D2CDB3 /* MainViewController.m */; };
-		D319BB83145CE32900D2CDB3 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB82145CE32900D2CDB3 /* FlipsideViewController.m */; };
 		D319BB86145CE32900D2CDB3 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D319BB84145CE32900D2CDB3 /* MainViewController.xib */; };
-		D319BB89145CE32900D2CDB3 /* FlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D319BB87145CE32900D2CDB3 /* FlipsideViewController.xib */; };
 		D319BB91145CE32900D2CDB3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BB90145CE32900D2CDB3 /* SenTestingKit.framework */; };
 		D319BB92145CE32900D2CDB3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BB6C145CE32800D2CDB3 /* UIKit.framework */; };
 		D319BB93145CE32900D2CDB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BB6E145CE32800D2CDB3 /* Foundation.framework */; };
 		D319BB9B145CE32900D2CDB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D319BB99145CE32900D2CDB3 /* InfoPlist.strings */; };
 		D319BB9E145CE32900D2CDB3 /* SyntheticServerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BB9D145CE32900D2CDB3 /* SyntheticServerTestTests.m */; };
+		D319BBAA145CE44B00D2CDB3 /* GTMTestHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */; };
+		D319BBAD145CE46A00D2CDB3 /* GTMHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */; };
+		D319BBB0145CE74200D2CDB3 /* GTMRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBAF145CE74200D2CDB3 /* GTMRegex.m */; };
+		D319BBB6145CE87E00D2CDB3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */; };
+		D319BBB7145CE88800D2CDB3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */; };
+		D319BBC0145CF26600D2CDB3 /* PDBackgroundHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */; };
+		D319BBC5145CF9C600D2CDB3 /* carlbrown.json in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC2145CF9C600D2CDB3 /* carlbrown.json */; };
+		D319BBC6145CF9C600D2CDB3 /* RegexONNSString.atom in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */; };
+		D319BBC7145CF9C600D2CDB3 /* RegexOnNSString.json in Resources */ = {isa = PBXBuildFile; fileRef = D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,24 +46,36 @@
 		D319BB6C145CE32800D2CDB3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D319BB6E145CE32800D2CDB3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D319BB70145CE32900D2CDB3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D319BB74145CE32900D2CDB3 /* SyntheticServerTest-Info.plist */ = {isa = PBXFileReference; path = "SyntheticServerTest-Info.plist"; sourceTree = "<group>"; };
+		D319BB74145CE32900D2CDB3 /* SyntheticServerTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SyntheticServerTest-Info.plist"; sourceTree = "<group>"; };
 		D319BB76145CE32900D2CDB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D319BB78145CE32900D2CDB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D319BB7A145CE32900D2CDB3 /* SyntheticServerTest-Prefix.pch */ = {isa = PBXFileReference; path = "SyntheticServerTest-Prefix.pch"; sourceTree = "<group>"; };
-		D319BB7B145CE32900D2CDB3 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		D319BB7A145CE32900D2CDB3 /* SyntheticServerTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SyntheticServerTest-Prefix.pch"; sourceTree = "<group>"; };
+		D319BB7B145CE32900D2CDB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D319BB7C145CE32900D2CDB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D319BB7E145CE32900D2CDB3 /* MainViewController.h */ = {isa = PBXFileReference; path = MainViewController.h; sourceTree = "<group>"; };
+		D319BB7E145CE32900D2CDB3 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D319BB7F145CE32900D2CDB3 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		D319BB81145CE32900D2CDB3 /* FlipsideViewController.h */ = {isa = PBXFileReference; path = FlipsideViewController.h; sourceTree = "<group>"; };
-		D319BB82145CE32900D2CDB3 /* FlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
 		D319BB85145CE32900D2CDB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainViewController.xib; sourceTree = "<group>"; };
-		D319BB88145CE32900D2CDB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FlipsideViewController.xib; sourceTree = "<group>"; };
 		D319BB8F145CE32900D2CDB3 /* SyntheticServerTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyntheticServerTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D319BB90145CE32900D2CDB3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		D319BB98145CE32900D2CDB3 /* SyntheticServerTestTests-Info.plist */ = {isa = PBXFileReference; path = "SyntheticServerTestTests-Info.plist"; sourceTree = "<group>"; };
+		D319BB98145CE32900D2CDB3 /* SyntheticServerTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SyntheticServerTestTests-Info.plist"; sourceTree = "<group>"; };
 		D319BB9A145CE32900D2CDB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D319BB9C145CE32900D2CDB3 /* SyntheticServerTestTests.h */ = {isa = PBXFileReference; path = SyntheticServerTestTests.h; sourceTree = "<group>"; };
 		D319BB9D145CE32900D2CDB3 /* SyntheticServerTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyntheticServerTestTests.m; sourceTree = "<group>"; };
+		D319BBA8145CE44B00D2CDB3 /* GTMTestHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMTestHTTPServer.h; sourceTree = "<group>"; };
+		D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMTestHTTPServer.m; sourceTree = "<group>"; };
+		D319BBAB145CE46A00D2CDB3 /* GTMHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPServer.h; sourceTree = "<group>"; };
+		D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPServer.m; sourceTree = "<group>"; };
+		D319BBAE145CE74100D2CDB3 /* GTMRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMRegex.h; sourceTree = "<group>"; };
+		D319BBAF145CE74200D2CDB3 /* GTMRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMRegex.m; sourceTree = "<group>"; };
+		D319BBB1145CE75500D2CDB3 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		D319BBB2145CE77F00D2CDB3 /* GTMDebugSelectorValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDebugSelectorValidation.h; sourceTree = "<group>"; };
+		D319BBB3145CE77F00D2CDB3 /* GTMTypeCasting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMTypeCasting.h; sourceTree = "<group>"; };
+		D319BBB4145CE79700D2CDB3 /* GTMGarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGarbageCollection.h; sourceTree = "<group>"; };
+		D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D319BBBE145CF26600D2CDB3 /* PDBackgroundHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBackgroundHTTPServer.h; sourceTree = "<group>"; };
+		D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBackgroundHTTPServer.m; sourceTree = "<group>"; };
+		D319BBC2145CF9C600D2CDB3 /* carlbrown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = carlbrown.json; sourceTree = SOURCE_ROOT; };
+		D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RegexONNSString.atom; sourceTree = SOURCE_ROOT; };
+		D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RegexOnNSString.json; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D319BBB6145CE87E00D2CDB3 /* CFNetwork.framework in Frameworks */,
 				D319BB6D145CE32800D2CDB3 /* UIKit.framework in Frameworks */,
 				D319BB6F145CE32900D2CDB3 /* Foundation.framework in Frameworks */,
 				D319BB71145CE32900D2CDB3 /* CoreGraphics.framework in Frameworks */,
@@ -77,6 +97,7 @@
 				D319BB91145CE32900D2CDB3 /* SenTestingKit.framework in Frameworks */,
 				D319BB92145CE32900D2CDB3 /* UIKit.framework in Frameworks */,
 				D319BB93145CE32900D2CDB3 /* Foundation.framework in Frameworks */,
+				D319BBB7145CE88800D2CDB3 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +107,8 @@
 		D319BB5D145CE32800D2CDB3 = {
 			isa = PBXGroup;
 			children = (
+				D319BBBD145CF22700D2CDB3 /* SyntheticServer */,
+				D319BBA7145CE3F800D2CDB3 /* OldGoogleToolBoxFiles */,
 				D319BB72145CE32900D2CDB3 /* SyntheticServerTest */,
 				D319BB96145CE32900D2CDB3 /* SyntheticServerTestTests */,
 				D319BB6B145CE32800D2CDB3 /* Frameworks */,
@@ -105,6 +128,7 @@
 		D319BB6B145CE32800D2CDB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D319BBB5145CE87E00D2CDB3 /* CFNetwork.framework */,
 				D319BB6C145CE32800D2CDB3 /* UIKit.framework */,
 				D319BB6E145CE32800D2CDB3 /* Foundation.framework */,
 				D319BB70145CE32900D2CDB3 /* CoreGraphics.framework */,
@@ -120,10 +144,7 @@
 				D319BB7C145CE32900D2CDB3 /* AppDelegate.m */,
 				D319BB7E145CE32900D2CDB3 /* MainViewController.h */,
 				D319BB7F145CE32900D2CDB3 /* MainViewController.m */,
-				D319BB81145CE32900D2CDB3 /* FlipsideViewController.h */,
-				D319BB82145CE32900D2CDB3 /* FlipsideViewController.m */,
 				D319BB84145CE32900D2CDB3 /* MainViewController.xib */,
-				D319BB87145CE32900D2CDB3 /* FlipsideViewController.xib */,
 				D319BB73145CE32900D2CDB3 /* Supporting Files */,
 			);
 			path = SyntheticServerTest;
@@ -143,7 +164,7 @@
 		D319BB96145CE32900D2CDB3 /* SyntheticServerTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				D319BB9C145CE32900D2CDB3 /* SyntheticServerTestTests.h */,
+				D319BBC1145CF73F00D2CDB3 /* TestData */,
 				D319BB9D145CE32900D2CDB3 /* SyntheticServerTestTests.m */,
 				D319BB97145CE32900D2CDB3 /* Supporting Files */,
 			);
@@ -157,6 +178,42 @@
 				D319BB99145CE32900D2CDB3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D319BBA7145CE3F800D2CDB3 /* OldGoogleToolBoxFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D319BBB4145CE79700D2CDB3 /* GTMGarbageCollection.h */,
+				D319BBB2145CE77F00D2CDB3 /* GTMDebugSelectorValidation.h */,
+				D319BBB3145CE77F00D2CDB3 /* GTMTypeCasting.h */,
+				D319BBB1145CE75500D2CDB3 /* GTMDefines.h */,
+				D319BBAE145CE74100D2CDB3 /* GTMRegex.h */,
+				D319BBAF145CE74200D2CDB3 /* GTMRegex.m */,
+				D319BBAB145CE46A00D2CDB3 /* GTMHTTPServer.h */,
+				D319BBAC145CE46A00D2CDB3 /* GTMHTTPServer.m */,
+				D319BBA8145CE44B00D2CDB3 /* GTMTestHTTPServer.h */,
+				D319BBA9145CE44B00D2CDB3 /* GTMTestHTTPServer.m */,
+			);
+			name = OldGoogleToolBoxFiles;
+			sourceTree = "<group>";
+		};
+		D319BBBD145CF22700D2CDB3 /* SyntheticServer */ = {
+			isa = PBXGroup;
+			children = (
+				D319BBBE145CF26600D2CDB3 /* PDBackgroundHTTPServer.h */,
+				D319BBBF145CF26600D2CDB3 /* PDBackgroundHTTPServer.m */,
+			);
+			name = SyntheticServer;
+			sourceTree = "<group>";
+		};
+		D319BBC1145CF73F00D2CDB3 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				D319BBC2145CF9C600D2CDB3 /* carlbrown.json */,
+				D319BBC3145CF9C600D2CDB3 /* RegexONNSString.atom */,
+				D319BBC4145CF9C600D2CDB3 /* RegexOnNSString.json */,
+			);
+			name = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +289,6 @@
 			files = (
 				D319BB77145CE32900D2CDB3 /* InfoPlist.strings in Resources */,
 				D319BB86145CE32900D2CDB3 /* MainViewController.xib in Resources */,
-				D319BB89145CE32900D2CDB3 /* FlipsideViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +297,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D319BB9B145CE32900D2CDB3 /* InfoPlist.strings in Resources */,
+				D319BBC5145CF9C600D2CDB3 /* carlbrown.json in Resources */,
+				D319BBC6145CF9C600D2CDB3 /* RegexONNSString.atom in Resources */,
+				D319BBC7145CF9C600D2CDB3 /* RegexOnNSString.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +329,6 @@
 				D319BB79145CE32900D2CDB3 /* main.m in Sources */,
 				D319BB7D145CE32900D2CDB3 /* AppDelegate.m in Sources */,
 				D319BB80145CE32900D2CDB3 /* MainViewController.m in Sources */,
-				D319BB83145CE32900D2CDB3 /* FlipsideViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D319BB9E145CE32900D2CDB3 /* SyntheticServerTestTests.m in Sources */,
+				D319BBAA145CE44B00D2CDB3 /* GTMTestHTTPServer.m in Sources */,
+				D319BBAD145CE46A00D2CDB3 /* GTMHTTPServer.m in Sources */,
+				D319BBB0145CE74200D2CDB3 /* GTMRegex.m in Sources */,
+				D319BBC0145CF26600D2CDB3 /* PDBackgroundHTTPServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,14 +369,6 @@
 				D319BB85145CE32900D2CDB3 /* en */,
 			);
 			name = MainViewController.xib;
-			sourceTree = "<group>";
-		};
-		D319BB87145CE32900D2CDB3 /* FlipsideViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D319BB88145CE32900D2CDB3 /* en */,
-			);
-			name = FlipsideViewController.xib;
 			sourceTree = "<group>";
 		};
 		D319BB99145CE32900D2CDB3 /* InfoPlist.strings */ = {
@@ -347,7 +401,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -364,7 +418,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
