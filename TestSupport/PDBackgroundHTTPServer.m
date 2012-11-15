@@ -57,5 +57,6 @@ static const NSTimeInterval kGiveUpInterval = 15.0; // bail on the test if 15 se
 -(void) dealloc {
     [server release], server = nil;
     [serverDocumentRoot release], serverDocumentRoot = nil;
+    [super dealloc];
 }
 @end
