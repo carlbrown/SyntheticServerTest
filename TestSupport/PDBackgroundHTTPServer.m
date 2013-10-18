@@ -35,9 +35,9 @@ static const NSTimeInterval kGiveUpInterval = 15.0; // bail on the test if 15 se
 }
 
 - (void) runServer {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];    
-    NSDate* giveUpDate = [NSDate dateWithTimeIntervalSinceNow:kGiveUpInterval];
-    self.server = [[GTMTestHTTPServer alloc] initWithDocRoot:self.serverDocumentRoot];
+	@autoreleasepool {    
+        NSDate* giveUpDate = [NSDate dateWithTimeIntervalSinceNow:kGiveUpInterval];
+        self.server = [[GTMTestHTTPServer alloc] initWithDocRoot:self.serverDocumentRoot];
 
 	while ([self shouldStop]==NO &&
 		   [giveUpDate timeIntervalSinceNow] > 0) {
@@ -46,7 +46,7 @@ static const NSTimeInterval kGiveUpInterval = 15.0; // bail on the test if 15 se
 		[NSDate dateWithTimeIntervalSinceNow:kRunLoopInterval];
 		[[NSRunLoop currentRunLoop] runUntilDate:loopIntervalDate]; 
 	}
-	[pool release];
+	}
 }
 
 // fetch the port the server is running on
@@ -55,8 +55,7 @@ static const NSTimeInterval kGiveUpInterval = 15.0; // bail on the test if 15 se
 }
 
 -(void) dealloc {
-    [server release], server = nil;
-    [serverDocumentRoot release], serverDocumentRoot = nil;
-    [super dealloc];
+    server = nil;
+    serverDocumentRoot = nil;
 }
 @end

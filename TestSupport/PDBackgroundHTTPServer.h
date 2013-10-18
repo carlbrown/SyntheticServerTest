@@ -16,8 +16,8 @@
 	BOOL shouldStop;
 }
 
-@property (nonatomic, retain) GTMTestHTTPServer *server;
-@property (nonatomic, retain) NSString *serverDocumentRoot;
+@property (nonatomic, strong) GTMTestHTTPServer *server;
+@property (nonatomic, strong) NSString *serverDocumentRoot;
 @property (nonatomic, readwrite) BOOL shouldStop;
 
 - (void) startServerWithDocumentRoot:(NSString *) documentRoot;

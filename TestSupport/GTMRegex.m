@@ -47,7 +47,7 @@ static NSString *const kReplacementPattern =
   BOOL allSegments_;
   BOOL treatStartOfNewSegmentAsBeginningOfString_;
   regoff_t curParseIndex_;
-  __strong regmatch_t *savedRegMatches_;
+  regmatch_t *savedRegMatches_;
 }
 - (id)initWithRegex:(GTMRegex *)regex
       processString:(NSString *)str
@@ -65,20 +65,20 @@ static NSString *const kReplacementPattern =
 @implementation GTMRegex
 
 + (id)regexWithPattern:(NSString *)pattern {
-  return [[[self alloc] initWithPattern:pattern] autorelease];
+  return [[self alloc] initWithPattern:pattern];
 }
 
 + (id)regexWithPattern:(NSString *)pattern options:(GTMRegexOptions)options {
-  return [[[self alloc] initWithPattern:pattern
-                                options:options] autorelease];
+  return [[self alloc] initWithPattern:pattern
+                                options:options];
 }
 
 + (id)regexWithPattern:(NSString *)pattern
                options:(GTMRegexOptions)options
              withError:(NSError **)outErrorOrNULL {
-  return [[[self alloc] initWithPattern:pattern
+  return [[self alloc] initWithPattern:pattern
                                 options:options
-                              withError:outErrorOrNULL] autorelease];
+                              withError:outErrorOrNULL];
 }
 
 + (NSString *)escapedPatternForString:(NSString *)str {
@@ -140,7 +140,6 @@ static NSString *const kReplacementPattern =
   if (outErrorOrNULL) *outErrorOrNULL = nil;
 
   if ([pattern length] == 0) {
-    [self release];
     return nil;
   }
 
@@ -158,7 +157,6 @@ static NSString *const kReplacementPattern =
   pattern_ = [pattern copy];
   if (!pattern_) {
      // COV_NF_START - no real way to force this in a unittest
-    [self release];
     return nil;
     // COV_NF_END
   }
@@ -183,7 +181,6 @@ static NSString *const kReplacementPattern =
                  pattern_, errorStr);
     }
 
-    [self release];
     return nil;
   }
 
@@ -207,11 +204,9 @@ static NSString *const kReplacementPattern =
   // we used pattern_ as our flag that we initialized the regex_t
   if (pattern_) {
     regfree(&regexData_);
-    [pattern_ release];
     // play it safe and clear it since we use it as a flag for regexData_
     pattern_ = nil;
   }
-  [super dealloc];
 }
 
 - (NSUInteger)subPatternCount {
@@ -270,9 +265,9 @@ static NSString *const kReplacementPattern =
         const char *base = utf8Str + regMatches[x].rm_so;
         regoff_t len = regMatches[x].rm_eo - regMatches[x].rm_so;
         NSString *sub =
-          [[[NSString alloc] initWithBytes:base
+          [[NSString alloc] initWithBytes:base
                                     length:(NSUInteger)len
-                                  encoding:NSUTF8StringEncoding] autorelease];
+                                  encoding:NSUTF8StringEncoding];
         [buildResult addObject:sub];
       }
     }
@@ -299,9 +294,9 @@ static NSString *const kReplacementPattern =
     const char *base = utf8Str + regMatch.rm_so;
     regoff_t len = regMatch.rm_eo - regMatch.rm_so;
     result =
-      [[[NSString alloc] initWithBytes:base
+      [[NSString alloc] initWithBytes:base
                                 length:(NSUInteger)len
-                              encoding:NSUTF8StringEncoding] autorelease];
+                              encoding:NSUTF8StringEncoding];
   }
   return result;
 }
@@ -319,15 +314,15 @@ static NSString *const kReplacementPattern =
 }
 
 - (NSEnumerator *)segmentEnumeratorForString:(NSString *)str {
-  return [[[GTMRegexEnumerator alloc] initWithRegex:self
+  return [[GTMRegexEnumerator alloc] initWithRegex:self
                                       processString:str
-                                        allSegments:YES] autorelease];
+                                        allSegments:YES];
 }
 
 - (NSEnumerator *)matchSegmentEnumeratorForString:(NSString *)str {
-  return [[[GTMRegexEnumerator alloc] initWithRegex:self
+  return [[GTMRegexEnumerator alloc] initWithRegex:self
                                       processString:str
-                                        allSegments:NO] autorelease];
+                                        allSegments:NO];
 }
 
 - (NSString *)stringByReplacingMatchesInString:(NSString *)str
@@ -349,9 +344,9 @@ static NSString *const kReplacementPattern =
     }
 #endif
     GTMRegexEnumerator *relacementEnumerator =
-      [[[GTMRegexEnumerator alloc] initWithRegex:replacementRegex
+      [[GTMRegexEnumerator alloc] initWithRegex:replacementRegex
                                         processString:replacementPattern
-                                          allSegments:YES] autorelease];
+                                          allSegments:YES];
     // We turn on treatStartOfNewSegmentAsBeginningOfLine for this enumerator.
     // As complex as kReplacementPattern is, it can't completely do what we want
     // with the normal string walk.  The problem is this, backreferences are a
@@ -497,13 +492,12 @@ static NSString *const kReplacementPattern =
   if (!self) return nil;
 
   // collect args
-  regex_ = [regex retain];
-  utf8StrBuf_ = [[str dataUsingEncoding:NSUTF8StringEncoding] retain];
+  regex_ = regex;
+  utf8StrBuf_ = [str dataUsingEncoding:NSUTF8StringEncoding];
   allSegments_ = allSegments;
 
   // arg check
   if (!regex_ || !utf8StrBuf_) {
-    [self release];
     return nil;
   }
 
@@ -515,9 +509,6 @@ static NSString *const kReplacementPattern =
 // Don't need a finalize because savedRegMatches_ is marked __strong
 - (void)dealloc {
   free(savedRegMatches_);
-  [regex_ release];
-  [utf8StrBuf_ release];
-  [super dealloc];
 }
 
 - (void)treatStartOfNewSegmentAsBeginningOfString:(BOOL)yesNo {
@@ -644,10 +635,10 @@ static NSString *const kReplacementPattern =
     // create the segment to return
     if (nextMatches) {
       result =
-        [[[GTMRegexStringSegment alloc] initWithUTF8StrBuf:utf8StrBuf_
+        [[GTMRegexStringSegment alloc] initWithUTF8StrBuf:utf8StrBuf_
                                                 regMatches:nextMatches
                                              numRegMatches:[regex_ subPatternCount]
-                                                   isMatch:isMatch] autorelease];
+                                                   isMatch:isMatch];
       nextMatches = nil;
     }
   } @catch (id e) { // COV_NF_START - no real way to force this in a test
@@ -675,15 +666,12 @@ static NSString *const kReplacementPattern =
   // make sure init is never called, the class in in the header so someone
   // could try to create it by mistake.
   // Call super init and release so we don't leak
-  [[super init] autorelease];
-  [self doesNotRecognizeSelector:_cmd];
+  [[super init] doesNotRecognizeSelector:_cmd];
   return nil; // COV_NF_LINE - return is just here to keep gcc happy
 }
 
 - (void)dealloc {
   free(regMatches_);
-  [utf8StrBuf_ release];
-  [super dealloc];
 }
 
 - (BOOL)isMatch {
@@ -709,9 +697,9 @@ static NSString *const kReplacementPattern =
     + regMatches_[patternIndex].rm_so;
   regoff_t len = regMatches_[patternIndex].rm_eo 
     - regMatches_[patternIndex].rm_so;
-  return [[[NSString alloc] initWithBytes:base
+  return [[NSString alloc] initWithBytes:base
                                    length:(NSUInteger)len
-                                 encoding:NSUTF8StringEncoding] autorelease];
+                                 encoding:NSUTF8StringEncoding];
 }
 
 - (NSString *)description {
@@ -744,7 +732,7 @@ static NSString *const kReplacementPattern =
   self = [super init];
   if (!self) return nil;
 
-  utf8StrBuf_ = [utf8StrBuf retain];
+  utf8StrBuf_ = utf8StrBuf;
   regMatches_ = regMatches;
   numRegMatches_ = numRegMatches;
   isMatch_ = isMatch;
@@ -753,7 +741,6 @@ static NSString *const kReplacementPattern =
   if (!utf8StrBuf_ || !regMatches_) {
     // COV_NF_START
     // this could only happen something messed w/ our internal state.
-    [self release];
     return nil;
     // COV_NF_END
   }

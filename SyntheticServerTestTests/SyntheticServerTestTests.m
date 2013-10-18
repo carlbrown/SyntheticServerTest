@@ -28,7 +28,7 @@
 - (void)tearDown
 {
     [testServer setShouldStop:YES];
-    [testServer release]; testServer=nil;
+     testServer=nil;
     
     [super tearDown];
 }
