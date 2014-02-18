@@ -711,9 +711,9 @@ static NSString *const kReplacementPattern =
     const char* string 
       = (((const char*)[utf8StrBuf_ bytes]) + regMatches_[x].rm_so);
     if (x == 0) {
-      [result appendFormat:@" \"%.*s\"", length , string];
+      [result appendFormat:@" \"%.*s\"", (int) length , string];
     } else {
-      [result appendFormat:@", \"%.*s\"", length , string];
+      [result appendFormat:@", \"%.*s\"", (int) length , string];
     }
   }
   [result appendString:@" ) }"];

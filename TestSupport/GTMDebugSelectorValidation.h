@@ -61,7 +61,7 @@ static void GTMAssertSelectorNilOrImplementedWithReturnTypeAndArguments(id obj, 
                       @"\"%@\" selector \"%@\" argument %d should be type %s", 
                       NSStringFromClass([obj class]), 
                       NSStringFromSelector(sel),
-                      (argCount - 2),
+                      (int)(argCount - 2),
                       expectedArgType);
       }
       argCount++;
@@ -72,7 +72,7 @@ static void GTMAssertSelectorNilOrImplementedWithReturnTypeAndArguments(id obj, 
                   @"\"%@\" selector \"%@\" should have %d arguments",
                   NSStringFromClass([obj class]), 
                   NSStringFromSelector(sel),
-                  (argCount - 2));
+                  (int)(argCount - 2));
     
     // if asked, validate the return type
     if (retType && (strcmp("gtm_skip_return_test", retType) != 0)) {
