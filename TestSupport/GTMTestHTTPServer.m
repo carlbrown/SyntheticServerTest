@@ -39,18 +39,12 @@ static NSArray *GetSubPatternsOfFirstStringMatchedByPattern(NSString *stringToSe
     if ((docRoot == nil) || (![server_ start:&error])) {
       _GTMDevLog(@"Failed to start up the webserver (docRoot='%@', error=%@)",
                  docRoot_, error);
-      [self release];
       return nil;
     }
   }
   return self;
 }
 
-- (void)dealloc {
-  [docRoot_ release];
-  [server_ release];
-  [super dealloc];
-}
 
 - (uint16_t)port {
   return [server_ port];
@@ -67,8 +61,8 @@ static NSArray *GetSubPatternsOfFirstStringMatchedByPattern(NSString *stringToSe
   NSString *postString = @"";
   NSData *postData = [request body];
   if ([postData length] > 0) {
-    postString = [[[NSString alloc] initWithData:postData
-                                        encoding:NSUTF8StringEncoding] autorelease];
+    postString = [[NSString alloc] initWithData:postData
+                                        encoding:NSUTF8StringEncoding];
   }
   
   NSDictionary *allHeaders = [request allHeaderFieldValues];

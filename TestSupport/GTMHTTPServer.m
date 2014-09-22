@@ -6,9 +6,9 @@
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not
 //  use this file except in compliance with the License.  You may obtain a copy
 //  of the License at
-// 
+//
 //  http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 //  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
@@ -26,7 +26,6 @@
 #define GTMHTTPSERVER_DEFINE_GLOBALS
 #import "GTMHTTPServer.h"
 #import "GTMDebugSelectorValidation.h"
-#import "GTMGarbageCollection.h"
 #import "GTMDefines.h"
 #import "GTMTypeCasting.h"
 
@@ -63,189 +62,194 @@ static NSString *kResponse = @"Response";
 @implementation GTMHTTPServer
 
 - (id)init {
-  return [self initWithDelegate:nil];
+    return [self initWithDelegate:nil];
 }
 
 - (id)initWithDelegate:(id)delegate {
-  self = [super init];
-  if (self) {
-    if (!delegate) {
-      _GTMDevLog(@"missing delegate");
-      [self release];
-      return nil;
+    self = [super init];
+    if (self) {
+        if (!delegate) {
+            _GTMDevLog(@"missing delegate");
+            return nil;
+        }
+        delegate_ = delegate;
+        GTMAssertSelectorNilOrImplementedWithReturnTypeAndArguments(delegate_,
+                                                                    @selector(httpServer:handleRequest:),
+                                                                    // return type
+                                                                    @encode(GTMHTTPResponseMessage *),
+                                                                    // args
+                                                                    @encode(GTMHTTPServer *),
+                                                                    @encode(GTMHTTPRequestMessage *),
+                                                                    NULL);
+        localhostOnly_ = YES;
+        connections_ = [[NSMutableArray alloc] init];
     }
-    delegate_ = delegate;
-    GTMAssertSelectorNilOrImplementedWithReturnTypeAndArguments(delegate_,
-                                                                @selector(httpServer:handleRequest:),
-                                                                // return type
-                                                                @encode(GTMHTTPResponseMessage *),
-                                                                // args
-                                                                @encode(GTMHTTPServer *),
-                                                                @encode(GTMHTTPRequestMessage *),
-                                                                NULL);
-    localhostOnly_ = YES;
-    connections_ = [[NSMutableArray alloc] init];
-  }
-  return self;
+    return self;
 }
 
 - (void)dealloc {
-  [self stop];
-  [connections_ release];
-  [super dealloc];
+    [self stop];
 }
 
 #if GTM_SUPPORT_GC
 - (void)finalize {
-  [self stop];
-  [super finalize];
+    [self stop];
+    [super finalize];
 }
 #endif
 
 - (id)delegate {
-  return delegate_;
+    return delegate_;
 }
 
 - (uint16_t)port {
-  return port_;
+    return port_;
 }
 
 - (void)setPort:(uint16_t)port {
-  port_ = port;
+    port_ = port;
 }
 
 - (BOOL)reusePort {
-  return reusePort_;
+    return reusePort_;
 }
 
 - (void)setReusePort:(BOOL)yesno {
-  reusePort_ = yesno;
+    reusePort_ = yesno;
 }
 
 - (BOOL)localhostOnly {
-  return localhostOnly_;
+    return localhostOnly_;
 }
 
 - (void)setLocalhostOnly:(BOOL)yesno {
-  localhostOnly_ = yesno;
+    localhostOnly_ = yesno;
 }
 
 - (BOOL)start:(NSError **)error {
-  _GTMDevAssert(listenHandle_ == nil,
-                @"start called when we already have a listenHandle_");
-  
-  if (error) *error = NULL;
-  
-  NSInteger startFailureCode = 0;
-  int fd = socket(AF_INET, SOCK_STREAM, 0);
-  if (fd <= 0) {
-    // COV_NF_START - we'd need to use up *all* sockets to test this?
-    startFailureCode = kGTMHTTPServerSocketCreateFailedError;
-    goto startFailed;
-    // COV_NF_END
-  }
-  
-  // enable address reuse quicker after we are done w/ our socket
-  int yes = 1;
-  int sock_opt = reusePort_ ? SO_REUSEPORT : SO_REUSEADDR;
-  if (setsockopt(fd, SOL_SOCKET, sock_opt,
-                 (void *)&yes, (socklen_t)sizeof(yes)) != 0) {
-    _GTMDevLog(@"failed to mark the socket as reusable"); // COV_NF_LINE
-  }
-
-  // bind
-  struct sockaddr_in addr;
-  bzero(&addr, sizeof(addr));
-  addr.sin_len    = sizeof(addr);
-  addr.sin_family = AF_INET;
-  addr.sin_port   = htons(port_);
-  if (localhostOnly_) {
-    addr.sin_addr.s_addr = htonl(0x7F000001);
-  } else {
-    // COV_NF_START - testing this could cause a leopard firewall prompt during tests.
-    addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    // COV_NF_END
-  }
-  if (bind(fd, (struct sockaddr*)(&addr), (socklen_t)sizeof(addr)) != 0) {
-    startFailureCode = kGTMHTTPServerBindFailedError;
-    goto startFailed;
-  }
-  
-  // collect the port back out
-  if (port_ == 0) {
-    socklen_t len = (socklen_t)sizeof(addr);
-    if (getsockname(fd, (struct sockaddr*)(&addr), &len) == 0) {
-      port_ = ntohs(addr.sin_port);
+    _GTMDevAssert(listenHandle_ == nil,
+                  @"start called when we already have a listenHandle_");
+    
+    if (error) *error = NULL;
+    
+    NSInteger startFailureCode = 0;
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (fd <= 0) {
+        // COV_NF_START - we'd need to use up *all* sockets to test this?
+        startFailureCode = kGTMHTTPServerSocketCreateFailedError;
+        goto startFailed;
+        // COV_NF_END
     }
-  }
-  
-  // tell it to listen for connections
-  if (listen(fd, 5) != 0) {
-    // COV_NF_START
-    startFailureCode = kGTMHTTPServerListenFailedError;
-    goto startFailed;
-    // COV_NF_END
-  }
-  
-  // now use a filehandle to accept connections
-  listenHandle_ =
-    [[NSFileHandle alloc] initWithFileDescriptor:fd closeOnDealloc:YES];
-  if (listenHandle_ == nil) {
-    // COV_NF_START - we'd need to run out of memory to test this?
-    startFailureCode = kGTMHTTPServerHandleCreateFailedError;
-    goto startFailed;
-    // COV_NF_END
-  }
-  
-  // setup notifications for connects
-  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-  [center addObserver:self
-             selector:@selector(acceptedConnectionNotification:)
-                 name:NSFileHandleConnectionAcceptedNotification
-               object:listenHandle_];
-  [listenHandle_ acceptConnectionInBackgroundAndNotify];
-  
-  // TODO: maybe hit the delegate incase it wants to register w/ NSNetService,
-  // or just know we're up and running?
-  
-  return YES;
-  
+    
+    // enable address reuse quicker after we are done w/ our socket
+    int yes = 1;
+    int sock_opt = reusePort_ ? SO_REUSEPORT : SO_REUSEADDR;
+    if (setsockopt(fd, SOL_SOCKET, sock_opt,
+                   (void *)&yes, (socklen_t)sizeof(yes)) != 0) {
+        _GTMDevLog(@"failed to mark the socket as reusable"); // COV_NF_LINE
+    }
+    
+    // bind
+    struct sockaddr_in addr;
+    bzero(&addr, sizeof(addr));
+    addr.sin_len    = sizeof(addr);
+    addr.sin_family = AF_INET;
+    addr.sin_port   = htons(port_);
+    if (localhostOnly_) {
+        addr.sin_addr.s_addr = htonl(0x7F000001);
+    } else {
+        // COV_NF_START - testing this could cause a leopard firewall prompt during tests.
+        addr.sin_addr.s_addr = htonl(INADDR_ANY);
+        // COV_NF_END
+    }
+    if (bind(fd, (struct sockaddr*)(&addr), (socklen_t)sizeof(addr)) != 0) {
+        startFailureCode = kGTMHTTPServerBindFailedError;
+        goto startFailed;
+    }
+    
+    {
+        // collect the port back out
+        if (port_ == 0) {
+            socklen_t len = (socklen_t)sizeof(addr);
+            if (getsockname(fd, (struct sockaddr*)(&addr), &len) == 0) {
+                port_ = ntohs(addr.sin_port);
+            }
+        }
+    }
+    
+    {
+        // tell it to listen for connections
+        if (listen(fd, 5) != 0) {
+            // COV_NF_START
+            startFailureCode = kGTMHTTPServerListenFailedError;
+            goto startFailed;
+            // COV_NF_END
+        }
+    }
+    
+    {
+        // now use a filehandle to accept connections
+        listenHandle_ =
+        [[NSFileHandle alloc] initWithFileDescriptor:fd closeOnDealloc:YES];
+        if (listenHandle_ == nil) {
+            // COV_NF_START - we'd need to run out of memory to test this?
+            startFailureCode = kGTMHTTPServerHandleCreateFailedError;
+            goto startFailed;
+            // COV_NF_END
+        }
+    }
+    
+    {
+        
+        // setup notifications for connects
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self
+                   selector:@selector(acceptedConnectionNotification:)
+                       name:NSFileHandleConnectionAcceptedNotification
+                     object:listenHandle_];
+        [listenHandle_ acceptConnectionInBackgroundAndNotify];
+        
+        // TODO: maybe hit the delegate incase it wants to register w/ NSNetService,
+        // or just know we're up and running?
+        
+        return YES;
+        
+    }
 startFailed:
-  if (error) {
-    *error = [[[NSError alloc] initWithDomain:kGTMHTTPServerErrorDomain 
-                                         code:startFailureCode 
-                                     userInfo:nil] autorelease];
-  }
-  if (fd > 0) {
-    close(fd);
-  }
-  return NO;
+    if (error) {
+        *error = [[NSError alloc] initWithDomain:kGTMHTTPServerErrorDomain
+                                            code:startFailureCode
+                                        userInfo:nil];
+    }
+    if (fd > 0) {
+        close(fd);
+    }
+    return NO;
 }
 
 - (void)stop {
-  if (listenHandle_) {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self
-                      name:NSFileHandleConnectionAcceptedNotification
-                    object:listenHandle_];
-    [listenHandle_ release];
-    listenHandle_ = nil;
-    // TODO: maybe hit the delegate in case it wants to unregister w/
-    // NSNetService, or just know we've stopped running?
-  }
-  [connections_ removeAllObjects];
+    if (listenHandle_) {
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center removeObserver:self
+                          name:NSFileHandleConnectionAcceptedNotification
+                        object:listenHandle_];
+        listenHandle_ = nil;
+        // TODO: maybe hit the delegate in case it wants to unregister w/
+        // NSNetService, or just know we've stopped running?
+    }
+    [connections_ removeAllObjects];
 }
 
 - (NSUInteger)activeRequestCount {
-  return [connections_ count];
+    return [connections_ count];
 }
 
 - (NSString *)description {
-  NSString *result =
+    NSString *result =
     [NSString stringWithFormat:@"%@<%p>{ port=%d localHostOnly=%@ status=%@ }",
      [self class], self, port_, (localhostOnly_ ? @"YES" : @"NO"),
      (listenHandle_ != nil ? @"Started" : @"Stopped") ];
-  return result;
+    return result;
 }
 
 
@@ -254,187 +258,185 @@ startFailed:
 @implementation GTMHTTPServer (PrivateMethods)
 
 - (void)acceptedConnectionNotification:(NSNotification *)notification {
-  NSDictionary *userInfo = [notification userInfo];
-  NSFileHandle *newConnection =
+    NSDictionary *userInfo = [notification userInfo];
+    NSFileHandle *newConnection =
     [userInfo objectForKey:NSFileHandleNotificationFileHandleItem];
-  _GTMDevAssert(newConnection != nil,
-                @"failed to get the connection in the notification: %@",
-                notification);
-
-  // make sure we accept more...
-  [listenHandle_ acceptConnectionInBackgroundAndNotify];
-  
-  // TODO: could let the delegate look at the address, before we start working
-  // on it.
-  
-  NSMutableDictionary *connDict =
+    _GTMDevAssert(newConnection != nil,
+                  @"failed to get the connection in the notification: %@",
+                  notification);
+    
+    // make sure we accept more...
+    [listenHandle_ acceptConnectionInBackgroundAndNotify];
+    
+    // TODO: could let the delegate look at the address, before we start working
+    // on it.
+    
+    NSMutableDictionary *connDict =
     [self connectionWithFileHandle:newConnection];
-  [connections_ addObject:connDict];
+    [connections_ addObject:connDict];
 }
 
 - (NSMutableDictionary *)connectionWithFileHandle:(NSFileHandle *)fileHandle {
-  NSMutableDictionary *result = [NSMutableDictionary dictionary];
-
-  [result setObject:fileHandle forKey:kFileHandle];
-
-  GTMHTTPRequestMessage *request =
-    [[[GTMHTTPRequestMessage alloc] init] autorelease];
-  [result setObject:request forKey:kRequest];
-  
-  // setup for data notifications
-  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-  [center addObserver:self
-             selector:@selector(dataAvailableNotification:)
-                 name:NSFileHandleReadCompletionNotification
-               object:fileHandle];
-  [fileHandle readInBackgroundAndNotify];
-
-  return result;
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    
+    [result setObject:fileHandle forKey:kFileHandle];
+    
+    GTMHTTPRequestMessage *request =
+    [[GTMHTTPRequestMessage alloc] init];
+    [result setObject:request forKey:kRequest];
+    
+    // setup for data notifications
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(dataAvailableNotification:)
+                   name:NSFileHandleReadCompletionNotification
+                 object:fileHandle];
+    [fileHandle readInBackgroundAndNotify];
+    
+    return result;
 }
 
 - (void)dataAvailableNotification:(NSNotification *)notification {
-  NSFileHandle *connectionHandle = GTM_STATIC_CAST(NSFileHandle, 
-                                                   [notification object]);
-  NSMutableDictionary *connDict = [self lookupConnection:connectionHandle];
-  if (connDict == nil) return; // we are no longer tracking this one
-
-  NSDictionary *userInfo = [notification userInfo];
-  NSData *readData = [userInfo objectForKey:NSFileHandleNotificationDataItem];
-  if ([readData length] == 0) {
-    // remote side closed
-    [self closeConnection:connDict];
-    return;
-  }
-  
-  // Use a local pool to keep memory down incase the runloop we're in doesn't
-  // drain until it gets a UI event.
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  @try {
-    // Like Apple's sample, we just keep adding data until we get a full header
-    // and any referenced body.
-
-    GTMHTTPRequestMessage *request = [connDict objectForKey:kRequest];
-    [request appendData:readData];
+    NSFileHandle *connectionHandle = GTM_STATIC_CAST(NSFileHandle,
+                                                     [notification object]);
+    NSMutableDictionary *connDict = [self lookupConnection:connectionHandle];
+    if (connDict == nil) return; // we are no longer tracking this one
     
-    // Is the header complete yet?
-    if (![request isHeaderComplete]) {
-      // more data...
-      [connectionHandle readInBackgroundAndNotify];
-    } else {
-    
-      // Do we have all the body?
-      UInt32 contentLength = [request contentLength];
-      NSData *body = [request body];
-      NSUInteger bodyLength = [body length];
-      if (contentLength > bodyLength) {
-        // need more data...
-        [connectionHandle readInBackgroundAndNotify];
-      } else {
-        
-        if (contentLength < bodyLength) {
-          // We got extra (probably someone trying to pipeline on us), trim
-          // and let the extra data go...
-          NSData *newBody = [NSData dataWithBytes:[body bytes] 
-                                           length:contentLength];
-          [request setBody:newBody];
-          _GTMDevLog(@"Got %lu extra bytes on http request, ignoring them",
-                     (unsigned long)(bodyLength - contentLength));
-        }
-        
-        GTMHTTPResponseMessage *response = nil;
-        @try {
-          // Off to the delegate
-          response = [delegate_ httpServer:self handleRequest:request];
-        } @catch (NSException *e) {
-          _GTMDevLog(@"Exception trying to handle http request: %@", e);
-        } // COV_NF_LINE - radar 5851992 only reachable w/ an uncaught exception which isn't testable
-      
-        if (response) {
-          // We don't support connection reuse, so we add (force) the header to
-          // close every connection.
-          [response setValue:@"close" forHeaderField:@"Connection"];
-      
-          // spawn thread to send reply (since we do a blocking send)
-          [connDict setObject:response forKey:kResponse];
-          [NSThread detachNewThreadSelector:@selector(sendResponseOnNewThread:)
-                                   toTarget:self
-                                 withObject:connDict];
-        } else {
-          // No response, shut it down
-          [self closeConnection:connDict];
-        }
-
-      }
+    NSDictionary *userInfo = [notification userInfo];
+    NSData *readData = [userInfo objectForKey:NSFileHandleNotificationDataItem];
+    if ([readData length] == 0) {
+        // remote side closed
+        [self closeConnection:connDict];
+        return;
     }
-  } @catch (NSException *e) {  // COV_NF_START
-    _GTMDevLog(@"exception while read data: %@", e);
-    // exception while dealing with the connection, close it
-  }  // COV_NF_END
-  @finally {
-    [pool drain];
-  }
+    
+    // Use a local pool to keep memory down incase the runloop we're in doesn't
+    // drain until it gets a UI event.
+    @autoreleasepool {
+        @try {
+            // Like Apple's sample, we just keep adding data until we get a full header
+            // and any referenced body.
+            
+            GTMHTTPRequestMessage *request = [connDict objectForKey:kRequest];
+            [request appendData:readData];
+            
+            // Is the header complete yet?
+            if (![request isHeaderComplete]) {
+                // more data...
+                [connectionHandle readInBackgroundAndNotify];
+            } else {
+                
+                // Do we have all the body?
+                UInt32 contentLength = [request contentLength];
+                NSData *body = [request body];
+                NSUInteger bodyLength = [body length];
+                if (contentLength > bodyLength) {
+                    // need more data...
+                    [connectionHandle readInBackgroundAndNotify];
+                } else {
+                    
+                    if (contentLength < bodyLength) {
+                        // We got extra (probably someone trying to pipeline on us), trim
+                        // and let the extra data go...
+                        NSData *newBody = [NSData dataWithBytes:[body bytes]
+                                                         length:contentLength];
+                        [request setBody:newBody];
+                        _GTMDevLog(@"Got %lu extra bytes on http request, ignoring them",
+                                   (unsigned long)(bodyLength - contentLength));
+                    }
+                    
+                    GTMHTTPResponseMessage *response = nil;
+                    @try {
+                        // Off to the delegate
+                        response = [delegate_ httpServer:self handleRequest:request];
+                    } @catch (NSException *e) {
+                        _GTMDevLog(@"Exception trying to handle http request: %@", e);
+                    } // COV_NF_LINE - radar 5851992 only reachable w/ an uncaught exception which isn't testable
+                    
+                    if (response) {
+                        // We don't support connection reuse, so we add (force) the header to
+                        // close every connection.
+                        [response setValue:@"close" forHeaderField:@"Connection"];
+                        
+                        // spawn thread to send reply (since we do a blocking send)
+                        [connDict setObject:response forKey:kResponse];
+                        [NSThread detachNewThreadSelector:@selector(sendResponseOnNewThread:)
+                                                 toTarget:self
+                                               withObject:connDict];
+                    } else {
+                        // No response, shut it down
+                        [self closeConnection:connDict];
+                    }
+                    
+                }
+            }
+        } @catch (NSException *e) {  // COV_NF_START
+            _GTMDevLog(@"exception while read data: %@", e);
+            // exception while dealing with the connection, close it
+        }  // COV_NF_END
+    }
 }
 
 - (NSMutableDictionary *)lookupConnection:(NSFileHandle *)fileHandle {
-  NSMutableDictionary *result = nil;
-  NSMutableDictionary *connDict;
-  GTM_FOREACH_OBJECT(connDict, connections_) {
-    if (fileHandle == [connDict objectForKey:kFileHandle]) {
-      result = connDict;
-      break;
+    NSMutableDictionary *result = nil;
+    NSMutableDictionary *connDict;
+    GTM_FOREACH_OBJECT(connDict, connections_) {
+        if (fileHandle == [connDict objectForKey:kFileHandle]) {
+            result = connDict;
+            break;
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 - (void)closeConnection:(NSMutableDictionary *)connDict {
-  // remove the notification
-  NSFileHandle *connectionHandle = [connDict objectForKey:kFileHandle];
-  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-  [center removeObserver:self
-                    name:NSFileHandleReadCompletionNotification
-                  object:connectionHandle];
-  // in a non GC world, we're fine just letting the connect get closed when
-  // the object is release when it comes out of connections_, but in a GC world
-  // it won't get cleaned up 
-  [connectionHandle closeFile];
-  
-  // remove it from the list
-  [connections_ removeObject:connDict];
+    // remove the notification
+    NSFileHandle *connectionHandle = [connDict objectForKey:kFileHandle];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self
+                      name:NSFileHandleReadCompletionNotification
+                    object:connectionHandle];
+    // in a non GC world, we're fine just letting the connect get closed when
+    // the object is release when it comes out of connections_, but in a GC world
+    // it won't get cleaned up
+    [connectionHandle closeFile];
+    
+    // remove it from the list
+    [connections_ removeObject:connDict];
 }
 
 - (void)sendResponseOnNewThread:(NSMutableDictionary *)connDict {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  
-  @try {
-    GTMHTTPResponseMessage *response = [connDict objectForKey:kResponse];
-    NSFileHandle *connectionHandle = [connDict objectForKey:kFileHandle];
-    NSData *serialized = [response serializedData];
-    [connectionHandle writeData:serialized];
-  } @catch (NSException *e) {  // COV_NF_START - causing an exception here is to hard in a test
-    // TODO: let the delegate know about the exception (but do it on the main
-    // thread)
-    _GTMDevLog(@"exception while sending reply: %@", e);
-  }  // COV_NF_END
-  
-  // back to the main thread to close things down
-  [self performSelectorOnMainThread:@selector(sentResponse:)
-                         withObject:connDict
-                      waitUntilDone:NO];
-  
-  [pool release];
+    @autoreleasepool {
+        
+        @try {
+            GTMHTTPResponseMessage *response = [connDict objectForKey:kResponse];
+            NSFileHandle *connectionHandle = [connDict objectForKey:kFileHandle];
+            NSData *serialized = [response serializedData];
+            [connectionHandle writeData:serialized];
+        } @catch (NSException *e) {  // COV_NF_START - causing an exception here is to hard in a test
+            // TODO: let the delegate know about the exception (but do it on the main
+            // thread)
+            _GTMDevLog(@"exception while sending reply: %@", e);
+        }  // COV_NF_END
+        
+        // back to the main thread to close things down
+        [self performSelectorOnMainThread:@selector(sentResponse:)
+                               withObject:connDict
+                            waitUntilDone:NO];
+        
+    }
 }
 
 - (void)sentResponse:(NSMutableDictionary *)connDict {
-  // make sure we're still tracking this connection (in case server was stopped)
-  NSFileHandle *connection = [connDict objectForKey:kFileHandle];
-  NSMutableDictionary *connDict2 = [self lookupConnection:connection];
-  if (connDict != connDict2) return;
-  
-  // TODO: message the delegate that it was sent
-  
-  // close it down
-  [self closeConnection:connDict];
+    // make sure we're still tracking this connection (in case server was stopped)
+    NSFileHandle *connection = [connDict objectForKey:kFileHandle];
+    NSMutableDictionary *connDict2 = [self lookupConnection:connection];
+    if (connDict != connDict2) return;
+    
+    // TODO: message the delegate that it was sent
+    
+    // close it down
+    [self closeConnection:connDict];
 }
 
 @end
@@ -444,46 +446,45 @@ startFailed:
 @implementation GTMHTTPRequestMessage
 
 - (id)init {
-  self = [super init];
-  if (self) {
-    message_ = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES);
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        message_ = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES);
+    }
+    return self;
 }
 
 - (void)dealloc {
-  if (message_) {
-    CFRelease(message_);
-  }
-  [super dealloc];
+    if (message_) {
+        CFRelease(message_);
+    }
 }
 
 - (NSString *)version {
-  return GTMCFAutorelease(CFHTTPMessageCopyVersion(message_));
+    return CFBridgingRelease(CFHTTPMessageCopyVersion(message_));
 }
 
 - (NSURL *)URL {
-  return GTMCFAutorelease(CFHTTPMessageCopyRequestURL(message_));
+    return CFBridgingRelease(CFHTTPMessageCopyRequestURL(message_));
 }
 
 - (NSString *)method {
-  return GTMCFAutorelease(CFHTTPMessageCopyRequestMethod(message_));
+    return CFBridgingRelease(CFHTTPMessageCopyRequestMethod(message_));
 }
 
 - (NSData *)body {
-  return GTMCFAutorelease(CFHTTPMessageCopyBody(message_));
+    return CFBridgingRelease(CFHTTPMessageCopyBody(message_));
 }
 
 - (NSDictionary *)allHeaderFieldValues {
-  return GTMCFAutorelease(CFHTTPMessageCopyAllHeaderFields(message_));
+    return CFBridgingRelease(CFHTTPMessageCopyAllHeaderFields(message_));
 }
 
 - (NSString *)description {
-  CFStringRef desc = CFCopyDescription(message_);
-  NSString *result =
+    CFStringRef desc = CFCopyDescription(message_);
+    NSString *result =
     [NSString stringWithFormat:@"%@<%p>{ message=%@ }", [self class], self, desc];
-  CFRelease(desc);
-  return result;
+    CFRelease(desc);
+    return result;
 }
 
 @end
@@ -491,31 +492,31 @@ startFailed:
 @implementation GTMHTTPRequestMessage (PrivateHelpers)
 
 - (BOOL)isHeaderComplete {
-  return CFHTTPMessageIsHeaderComplete(message_) ? YES : NO;
+    return CFHTTPMessageIsHeaderComplete(message_) ? YES : NO;
 }
 
 - (BOOL)appendData:(NSData *)data {
-  return CFHTTPMessageAppendBytes(message_,
-                                  [data bytes], [data length]) ? YES : NO;
+    return CFHTTPMessageAppendBytes(message_,
+                                    [data bytes], [data length]) ? YES : NO;
 }
 
 - (NSString *)headerFieldValueForKey:(NSString *)key {
-  CFStringRef value = NULL;
-  if (key) {
-    value = CFHTTPMessageCopyHeaderFieldValue(message_, (CFStringRef)key);
-  }
-  return GTMCFAutorelease(value);
+    CFStringRef value = NULL;
+    if (key) {
+        value = CFHTTPMessageCopyHeaderFieldValue(message_, (__bridge CFStringRef)key);
+    }
+    return (__bridge NSString *)(value);
 }
 
 - (UInt32)contentLength {
-  return [[self headerFieldValueForKey:@"Content-Length"] intValue];
+    return [[self headerFieldValueForKey:@"Content-Length"] intValue];
 }
 
 - (void)setBody:(NSData *)body {
-  if (!body) {
-    body = [NSData data]; // COV_NF_LINE - can only happen in we fail to make the new data object
-  }
-  CFHTTPMessageSetBody(message_, (CFDataRef)body);
+    if (!body) {
+        body = [NSData data]; // COV_NF_LINE - can only happen in we fail to make the new data object
+    }
+    CFHTTPMessageSetBody(message_, (__bridge CFDataRef)body);
 }
 
 @end
@@ -525,58 +526,57 @@ startFailed:
 @implementation GTMHTTPResponseMessage
 
 - (id)init {
-  return [self initWithBody:nil contentType:nil statusCode:0];
+    return [self initWithBody:nil contentType:nil statusCode:0];
 }
 
 - (void)dealloc {
-  if (message_) {
-    CFRelease(message_);
-  }
-  [super dealloc];
+    if (message_) {
+        CFRelease(message_);
+    }
 }
 
 + (id)responseWithString:(NSString *)plainText {
-  NSData *body = [plainText dataUsingEncoding:NSUTF8StringEncoding];
-  return [self responseWithBody:body
-                    contentType:@"text/plain; charset=UTF-8"
-                     statusCode:200];
+    NSData *body = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+    return [self responseWithBody:body
+                      contentType:@"text/plain; charset=UTF-8"
+                       statusCode:200];
 }
 
 + (id)responseWithHTMLString:(NSString *)htmlString {
-  return [self responseWithBody:[htmlString dataUsingEncoding:NSUTF8StringEncoding]
-                    contentType:@"text/html; charset=UTF-8"
-                     statusCode:200];
+    return [self responseWithBody:[htmlString dataUsingEncoding:NSUTF8StringEncoding]
+                      contentType:@"text/html; charset=UTF-8"
+                       statusCode:200];
 }
 
 + (id)responseWithBody:(NSData *)body
            contentType:(NSString *)contentType
             statusCode:(int)statusCode {
-  return [[[[self class] alloc] initWithBody:body
-                                 contentType:contentType
-                                  statusCode:statusCode] autorelease];
+    return [[[self class] alloc] initWithBody:body
+                                  contentType:contentType
+                                   statusCode:statusCode];
 }
 
 + (id)emptyResponseWithCode:(int)statusCode {
-  return [[[[self class] alloc] initWithBody:nil
-                                 contentType:nil
-                                  statusCode:statusCode] autorelease];
+    return [[[self class] alloc] initWithBody:nil
+                                  contentType:nil
+                                   statusCode:statusCode];
 }
 
 - (void)setValue:(NSString*)value forHeaderField:(NSString*)headerField {
-  if ([headerField length] == 0) return;
-  if (value == nil) {
-    value = @"";
-  }
-  CFHTTPMessageSetHeaderFieldValue(message_,
-                                   (CFStringRef)headerField, (CFStringRef)value);
+    if ([headerField length] == 0) return;
+    if (value == nil) {
+        value = @"";
+    }
+    CFHTTPMessageSetHeaderFieldValue(message_,
+                                     (__bridge CFStringRef)headerField, (__bridge CFStringRef)value);
 }
 
 - (NSString *)description {
-  CFStringRef desc = CFCopyDescription(message_);
-  NSString *result =
+    CFStringRef desc = CFCopyDescription(message_);
+    NSString *result =
     [NSString stringWithFormat:@"%@<%p>{ message=%@ }", [self class], self, desc];
-  CFRelease(desc);
-  return result;
+    CFRelease(desc);
+    return result;
 }
 
 @end
@@ -586,39 +586,37 @@ startFailed:
 - (id)initWithBody:(NSData *)body
        contentType:(NSString *)contentType
         statusCode:(int)statusCode {
-  self = [super init];
-  if (self) {
-    if ((statusCode < 100) || (statusCode > 599)) {
-      [self release];
-      return nil;
+    self = [super init];
+    if (self) {
+        if ((statusCode < 100) || (statusCode > 599)) {
+            return nil;
+        }
+        message_ = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
+                                               statusCode, NULL,
+                                               kCFHTTPVersion1_0);
+        if (!message_) {
+            // COV_NF_START
+            return nil;
+            // COV_NF_END
+        }
+        NSUInteger bodyLength = 0;
+        if (body) {
+            bodyLength = [body length];
+            CFHTTPMessageSetBody(message_, (__bridge CFDataRef)body);
+        }
+        if ([contentType length] == 0) {
+            contentType = @"text/html";
+        }
+        NSString *bodyLenStr =
+        [NSString stringWithFormat:@"%lu", (unsigned long)bodyLength];
+        [self setValue:bodyLenStr forHeaderField:@"Content-Length"];
+        [self setValue:contentType forHeaderField:@"Content-Type"];
     }
-    message_ = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
-                                           statusCode, NULL,
-                                           kCFHTTPVersion1_0);
-    if (!message_) {
-      // COV_NF_START
-      [self release];
-      return nil;
-      // COV_NF_END
-    }
-    NSUInteger bodyLength = 0;
-    if (body) {
-      bodyLength = [body length];
-      CFHTTPMessageSetBody(message_, (CFDataRef)body);
-    }
-    if ([contentType length] == 0) {
-      contentType = @"text/html";
-    }
-    NSString *bodyLenStr =
-      [NSString stringWithFormat:@"%lu", (unsigned long)bodyLength];
-    [self setValue:bodyLenStr forHeaderField:@"Content-Length"];
-    [self setValue:contentType forHeaderField:@"Content-Type"];
-  }
-  return self;
+    return self;
 }
 
 - (NSData *)serializedData {
-  return GTMCFAutorelease(CFHTTPMessageCopySerializedMessage(message_));
+    return CFBridgingRelease(CFHTTPMessageCopySerializedMessage(message_));
 }
 
 @end
